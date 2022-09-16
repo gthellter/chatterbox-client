@@ -13,10 +13,18 @@ var RoomsView = {
 
   render: function() {
     // TODO: Render out the list of rooms.
+    var rooms = Object.keys(Rooms.storage);
   },
 
   renderRoom: function(roomname) {
     // TODO: Render out a single room.
+    var room = _.template( // pass in an object
+
+      '<div class="chat room">' +
+        '<h1> <%= roomname %> </h1>' +
+        '</div>'
+    );
+    $(room({'roomname': roomname})).appendTo(RoomsView.$select);
   },
 
   handleChange: function(event) {

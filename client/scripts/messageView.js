@@ -5,13 +5,12 @@ var MessageView = {
   // Learn more about Underscore's templating capability
   // here: https://underscorejs.org/#template.
   // TODO: Update this template accordingly.
-  render: _.template(`
-      <!--
-      <div class="chat">
-        <div class="username"></div>
-        <div></div>
-      </div>
-      -->
-    `)
+  render: _.template( // pass in an object
+
+    '<div class="chat message">' +
+        '<div class="username">name: <%= name %> </div>' +
+        '<div class="message">message: <%= message %> </div>' +
+      '</div>'
+  )
 
 };
