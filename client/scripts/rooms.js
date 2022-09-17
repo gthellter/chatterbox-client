@@ -9,8 +9,14 @@ var Rooms = {
 
   // TODO: Define methods which allow you to add rooms, update the list,
   // mark a room as selected, etc.
-  store: function (roomName) {
-    storage[roomName] = messages;
+  store: function (message) {
+    Rooms.storage[message.roomname];
+    if (!Rooms.storage[message.roomname]) {
+      Rooms.storage[message.roomname] = new Messages();
+      Rooms.storage[message.roomname].storeMessage(message);
+    } else {
+      Rooms.storage[message.roomname].storeMessage(message);
+    }
   }
 
 

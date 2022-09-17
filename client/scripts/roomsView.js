@@ -13,22 +13,45 @@ var RoomsView = {
 
   render: function() {
     // TODO: Render out the list of rooms.
+    //$('option').remove();
     var rooms = Object.keys(Rooms.storage);
+    rooms.forEach((room) => {
+      $(`<option> ${room}</option>`).appendTo(RoomsView.$select);
+    });
   },
 
-  renderRoom: function(roomname) {
+  renderRoom: function(roomName) {
     // TODO: Render out a single room.
-    var room = _.template( // pass in an object
+    // $('.chat').remove();
+    var $room = $('<div class="chat room">' +
+        `<h1> ${roomName}</h1>` +
+        '</div>')
+    ;
+    var selectedRoom = Rooms.storage[roomName];
+    while (selectedRoom && selectedRoom.size > 0) {
+      //console.log(selectedRoom.size);
+      var $message = $(MessageView.render(selectedRoom.retrieveMessage()));
+      $message.appendTo($room);
+    }
+    ($room).appendTo('#chats');
 
-      '<div class="chat room">' +
-        '<h1> <%= roomname %> </h1>' +
-        '</div>'
-    );
-    $(room({'roomname': roomname})).appendTo(RoomsView.$select);
   },
 
   handleChange: function(event) {
-    // TODO: Handle a user selecting a different room.
+    var selectBox = document.getElementsByClassName('rooms')[0];
+    console.log('how many times?');
+    selectBox.addEventListener('change', () => {
+      var index = selectBox.selectedIndex;
+      var selectedRoom = selectBox.options[index].value;
+      //$('.chat').remove();
+      RoomsView.renderRoom(selectedRoom);
+    }, true);
+    selectBox.removeEventListener('change', () => {
+      var index = selectBox.selectedIndex;
+      var selectedRoom = selectBox.options[index].value;
+      //$('.chat').remove();
+      RoomsView.renderRoom(selectedRoom);
+    }, true);
   },
 
   handleClick: function(event) {

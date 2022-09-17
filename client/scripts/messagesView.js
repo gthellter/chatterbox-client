@@ -15,7 +15,7 @@ var MessagesView = {
 
     // TODO: Render _all_ the messages.
     // iterate messages
-    // while (){}
+    // while (mess)
     // pass in message object to messageView.render
       // call renderMessage
   },

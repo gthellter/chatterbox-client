@@ -18,7 +18,7 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
+    //setInterval(App.fetch, 5000);
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
@@ -29,16 +29,10 @@ var App = {
       // examine the response from the server request:
       console.log(data);
       data.forEach((message) => {
-        var roomMessageStorage = Rooms.storage[message.roomname];
-        if (!roomMessageStorage) {
-          roomMessageStorage = new Messages();
-          roomMessageStorage.storeMessage(message);
-        } else {
-          roomMessageStorage.storeMessage(message);
-        }
+        Rooms.store(message);
       });
+      RoomsView.render();
       RoomsView.renderRoom();
-
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
       callback();
